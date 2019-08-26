@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <dimen name="switch_margin">8dp</dimen>
+
+    <dimen name="timeSample_width">100dp</dimen>
+    <dimen name="timeSample_height">40dp</dimen>
+
+    <dimen name="ip_width">160dp</dimen>
+    <dimen name="port_width">75dp</dimen>
+
+    <dimen name="video_size">300dp</dimen>
+</resources>
