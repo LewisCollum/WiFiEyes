@@ -27,6 +27,7 @@ import android.view.Surface
 import android.media.ImageReader
 import android.media.Image
 import android.view.SurfaceHolder
+import android.graphics.ImageFormat
 
 class MainActivity : Activity() {
     private lateinit var ip: EditText
@@ -40,6 +41,8 @@ class MainActivity : Activity() {
     private lateinit var cameraCaptureRequestBuilder: CaptureRequest.Builder 
     private lateinit var cameraId: String
 
+	private lateinit var imageReader: ImageReader
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -50,7 +53,7 @@ class MainActivity : Activity() {
         startStreamViewWhenConnectSwitchOn()
         requestCameraPermission()
         
-        //TODO implement startCameraStreamWhenStreamSwitchOn()
+        startCameraStreamWhenStreamSwitchOn()
     }
 
     override fun onResume() {
@@ -130,6 +133,16 @@ class MainActivity : Activity() {
             override fun onConfigureFailed(session: CameraCaptureSession) {}
         }, null)
     }
+
+	private fun startCameraStreamWhenStreamSwitchOn() {
+		val size = 10
+		imageReader = ImageReader.newInstance(size, size, ImageFormat.JPEG, 2)
+		imageReader.setOnImageAvailableListener(object: ImageReader.OnImageAvailableListener {
+			override fun onImageAvailable(reader: ImageReader) {
+				Log.v("MYLOG", "IMAGE AVAILABLE!")
+			}
+		}, null)
+	}
 
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
