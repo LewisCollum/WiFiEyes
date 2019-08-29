@@ -7,6 +7,7 @@ import android.view.ViewGroup
 
 class StreamViewAdapter: RecyclerView.Adapter<StreamViewAdapter.ViewHolder>() {
     private var streamViewCount: Int = 0
+    private lateinit var streamView: StreamView
 
     fun addStreamView() {
         ++streamViewCount
@@ -17,25 +18,26 @@ class StreamViewAdapter: RecyclerView.Adapter<StreamViewAdapter.ViewHolder>() {
         val view: View = LayoutInflater.from(parent.context).inflate(R.layout.stream_view_card, parent, false)
         return ViewHolder(view)
     }
-
-    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val streamView = StreamView(
-            cardView =  view.findViewById(R.id.stream_card),
-            videoView = view.findViewById(R.id.stream_video),
-            ipEditText = view.findViewById(R.id.ip),
-            portEditText = view.findViewById(R.id.port),
-            connectSwitch = view.findViewById(R.id.connect_switch),
-            removeButton = view.findViewById(R.id.remove)
-        )
-    }
+    class ViewHolder(view: View) : RecyclerView.ViewHolder(view)
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val streamView = holder.streamView
+        streamView = StreamViewFromXml.makeStreamViewFromView(holder.itemView)
+        handleEditTextPreferencesByPosition(position)
+        handleStreamConnection()
+        handleRemovingStreamViewsByPosition(position)
+    }
+
+    private fun handleEditTextPreferencesByPosition(position: Int) {
         streamView.ipEditText = PreferencedEditText.fromPreferenceName(streamView.ipEditText, "ip_$position")
         streamView.portEditText = PreferencedEditText.fromPreferenceName(streamView.portEditText, "port_$position")
+    }
 
+    private fun handleStreamConnection() {
         val streamViewSwitchListener = StreamViewSwitchListener(streamView)
         streamView.connectSwitch.setOnCheckedChangeListener(streamViewSwitchListener)
+    }
+
+    private fun handleRemovingStreamViewsByPosition(position: Int) {
         streamView.removeButton.setOnClickListener {
             streamView.connectSwitch.isChecked = false
             removeStreamViewByPosition(position)
