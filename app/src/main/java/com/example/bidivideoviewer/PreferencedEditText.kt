@@ -3,14 +3,14 @@ package com.example.bidivideoviewer
 import android.widget.EditText
 import android.content.SharedPreferences
 
-class PreferencedEditTextRebuilder {
+class PreferencedEditText {
 	companion object {
 		var preferences: SharedPreferences? = null 
 		
-		fun rebuildFromPreferenceName(rebuildable: EditText, name: String): EditText {
-			setTextFromPreferenceName(rebuildable, name)
-			setPreferenceUpdateListeners(rebuildable, name)
-			return rebuildable
+		fun fromPreferenceName(editText: EditText, name: String): EditText {
+			setTextFromPreferenceName(editText, name)
+			setPreferenceUpdateListeners(editText, name)
+			return editText
 		}
 
 		private fun setTextFromPreferenceName(editText: EditText, name: String) {
