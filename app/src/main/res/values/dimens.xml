@@ -9,8 +9,8 @@
     <dimen name="timeSample_width">100dp</dimen>
     <dimen name="timeSample_height">40dp</dimen>
 
-    <dimen name="ip_width">160dp</dimen>
-    <dimen name="port_width">75dp</dimen>
+    <dimen name="ip_width">140dp</dimen>
+    <dimen name="port_width">60dp</dimen>
 
     <dimen name="video_size">200dp</dimen>
 </resources>
