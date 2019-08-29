@@ -37,6 +37,7 @@ class StreamViewAdapter: RecyclerView.Adapter<StreamViewAdapter.ViewHolder>() {
         val streamViewSwitchListener = StreamViewSwitchListener(streamView)
         streamView.connectSwitch.setOnCheckedChangeListener(streamViewSwitchListener)
         streamView.removeButton.setOnClickListener {
+            streamView.connectSwitch.isChecked = false
             removeStreamViewByPosition(position)
         }
     }
