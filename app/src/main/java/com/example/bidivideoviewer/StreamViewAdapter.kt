@@ -20,11 +20,12 @@ class StreamViewAdapter: RecyclerView.Adapter<StreamViewAdapter.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val streamView = StreamView(
-            view.findViewById(R.id.stream_card),
-            view.findViewById(R.id.stream_video),
-            view.findViewById(R.id.ip),
-            view.findViewById(R.id.port),
-            view.findViewById(R.id.connect_switch)
+            cardView =  view.findViewById(R.id.stream_card),
+            videoView = view.findViewById(R.id.stream_video),
+            ipEditText = view.findViewById(R.id.ip),
+            portEditText = view.findViewById(R.id.port),
+            connectSwitch = view.findViewById(R.id.connect_switch),
+            removeButton = view.findViewById(R.id.remove)
         )
     }
 
@@ -35,6 +36,14 @@ class StreamViewAdapter: RecyclerView.Adapter<StreamViewAdapter.ViewHolder>() {
 
         val streamViewSwitchListener = StreamViewSwitchListener(streamView)
         streamView.connectSwitch.setOnCheckedChangeListener(streamViewSwitchListener)
+        streamView.removeButton.setOnClickListener {
+            removeStreamViewByPosition(position)
+        }
+    }
+
+    private fun removeStreamViewByPosition(position: Int) {
+        --streamViewCount
+        notifyItemRemoved(position)
     }
 
     override fun getItemCount() = streamViewCount
