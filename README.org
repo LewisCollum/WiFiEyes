@@ -1,2 +1,6 @@
-App Appearance
+Make sure the IP camera is streaming as HTTP and in the TS format (specifically, <ip>:<port>/stream.ts)
+
+* App Interface
+Add multiple IP cameras by clicking the '+' button. Enter the IP and port of the camera then press connect.
+
 [[https://github.com/LewisCollum/WiFiEyes/blob/master/doc/layout.png]]
